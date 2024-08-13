@@ -1,7 +1,15 @@
 const sqlite3 = require('sqlite3').verbose();
 
-const db = new sqlite3.Database(':memory:');
+// Conectar ao banco de dados SQLite armazenado em disco
+const db = new sqlite3.Database('./database.sqlite', (err) => {
+  if (err) {
+    console.error('Erro ao conectar ao banco de dados SQLite:', err.message);
+  } else {
+    console.log('Conectado ao banco de dados SQLite.');
+  }
+});
 
+// Criar a tabela de agendamentos, se não existir
 db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS agendamentos (
