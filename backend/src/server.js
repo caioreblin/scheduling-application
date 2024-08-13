@@ -7,7 +7,10 @@ const agendamentosRoutes = require('./routes/agendamentosRoutes');
 const app = express();
 
 // Configurações de middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 app.use(express.json());
 app.use(session({
   secret: 'secret_key',
